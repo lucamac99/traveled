@@ -1,0 +1,82 @@
+{
+  "common": {
+    "appName": "Wayfare",
+    "loading": "Loading…",
+    "back": "Back",
+    "signOut": "Sign out",
+    "save": "Save",
+    "cancel": "Cancel"
+  },
+  "roles": {
+    "owner": "Owner",
+    "editor": "Editor",
+    "viewer": "Viewer"
+  },
+  "login": {
+    "title": "Plan it together. Remember it together.",
+    "subtitle": "Sign in to see your trips and join the ones you're invited to.",
+    "google": "Continue with Google",
+    "error": "Sign-in didn't work. Please try again."
+  },
+  "trips": {
+    "title": "Your trips",
+    "new": "New trip",
+    "empty": "No trips yet. Create one, or open an invite link from a friend.",
+    "inviteInvalid": "That invite link is invalid, expired or revoked. Ask for a new one.",
+    "dates": "{start} – {end}",
+    "noDates": "Dates not set"
+  },
+  "newTrip": {
+    "title": "New trip",
+    "fieldTitle": "Trip name",
+    "fieldDestination": "Destination",
+    "fieldStart": "Start date",
+    "fieldEnd": "End date",
+    "fieldTimezone": "Time zone",
+    "timezoneHint": "Used for the day plan. You can change it per day later.",
+    "submit": "Create trip",
+    "errors": {
+      "title_required": "Give the trip a name.",
+      "title_too_long": "Keep the name under 120 characters.",
+      "destination_too_long": "Keep the destination under 200 characters.",
+      "invalid_date": "Use a valid date.",
+      "end_before_start": "The end date must be on or after the start date.",
+      "invalid_timezone": "Choose a valid time zone.",
+      "save_failed": "Couldn't save the trip. Please try again."
+    }
+  },
+  "trip": {
+    "members": "Travellers",
+    "settings": "Members & invites",
+    "notFound": "This trip doesn't exist or you're not a member.",
+    "comingNext": "The day plan, map and checklist arrive in the next milestones."
+  },
+  "settings": {
+    "title": "Members & invites",
+    "members": "Travellers",
+    "you": "you",
+    "invite": "Invite friends",
+    "inviteHint": "Anyone with the link can join until it expires (14 days) or you revoke it.",
+    "role": "Role",
+    "createLink": "Create invite link",
+    "copy": "Copy link",
+    "copied": "Copied",
+    "linkOnce": "Copy it now: for safety, the full link is shown only once.",
+    "active": "Active links",
+    "none": "No active links.",
+    "expires": "{role} · expires {date}",
+    "revoke": "Revoke",
+    "ownerOnly": "Only the trip owner can invite people.",
+    "errors": {
+      "invalid_input": "Something was missing. Please try again.",
+      "not_allowed": "Only the trip owner can create invite links.",
+      "save_failed": "Couldn't create the link. Please try again."
+    }
+  },
+  "join": {
+    "title": "You're invited",
+    "as": "Join as {role}",
+    "button": "Join trip",
+    "invalid": "This invite link is invalid, expired or revoked. Ask the trip owner for a new one."
+  }
+}

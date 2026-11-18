@@ -1,0 +1,58 @@
+name: Nightly database backup
+
+# The Supabase free plan has no automatic backups (docs/DECISIONS.md #7).
+# Interim storage until R2 exists (M6): an encrypted artifact in this PRIVATE repo, kept 30 days.
+# Required repo secrets: SUPABASE_DB_URL (session pooler URL) and BACKUP_PASSPHRASE.
+# Restore: gpg --decrypt wayfare-<date>.sql.gpg > dump.sql, then psql "$DB_URL" -f dump.sql
+
+on:
+  schedule:
+    - cron: "30 2 * * *"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  backup:
+    runs-on: ubuntu-latest
+    env:
+      SUPABASE_DB_URL: ${{ secrets.SUPABASE_DB_URL }}
+      BACKUP_PASSPHRASE: ${{ secrets.BACKUP_PASSPHRASE }}
+    steps:
+      - name: Skip when not configured
+        id: guard
+        run: |
+          if [ -z "$SUPABASE_DB_URL" ] || [ -z "$BACKUP_PASSPHRASE" ]; then
+            echo "Backup secrets not set; skipping."
+            echo "skip=true" >> "$GITHUB_OUTPUT"
+          fi
+      - uses: actions/checkout@v4
+        if: steps.guard.outputs.skip != 'true'
+      - uses: actions/setup-node@v4
+        if: steps.guard.outputs.skip != 'true'
+        with:
+          node-version: 24
+          cache: npm
+      - if: steps.guard.outputs.skip != 'true'
+        run: npm ci
+      - name: Dump and encrypt
+        if: steps.guard.outputs.skip != 'true'
+        run: |
+          set -euo pipefail
+          umask 077
+          stamp=$(date -u +%Y-%m-%d)
+          npx supabase db dump --db-url "$SUPABASE_DB_URL" -f schema.sql
+          npx supabase db dump --db-url "$SUPABASE_DB_URL" --data-only -f data.sql
+          cat schema.sql data.sql > "wayfare-$stamp.sql"
+          gpg --batch --yes --pinentry-mode loopback --passphrase "$BACKUP_PASSPHRASE" \
+              --symmetric --cipher-algo AES256 -o "wayfare-$stamp.sql.gpg" "wayfare-$stamp.sql"
+          rm -f schema.sql data.sql "wayfare-$stamp.sql"
+          echo "STAMP=$stamp" >> "$GITHUB_ENV"
+      - uses: actions/upload-artifact@v4
+        if: steps.guard.outputs.skip != 'true'
+        with:
+          name: wayfare-db-${{ env.STAMP }}
+          path: wayfare-*.sql.gpg
+          retention-days: 30
+          if-no-files-found: error

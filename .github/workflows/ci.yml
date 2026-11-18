@@ -1,0 +1,56 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: ci-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  checks:
+    runs-on: ubuntu-latest
+    env:
+      # Placeholders: the build never calls Supabase (all data reads happen at request time).
+      NEXT_PUBLIC_SUPABASE_URL: https://placeholder.supabase.co
+      NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY: sb_publishable_placeholder_for_ci_only
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+          cache: npm
+      - run: npm ci
+      - run: npm run lint
+      - run: npm run typecheck
+      - run: npm test
+      - run: npm run build
+
+  db-tests:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+          cache: npm
+      - run: npm ci
+      - name: Start local Supabase (applies migrations)
+        run: npx supabase start -x studio,imgproxy,vector,logflare,edge-runtime,supavisor,storage-api,realtime
+      - name: RLS and invite tests
+        run: |
+          status=$(npx supabase status -o json)
+          export SUPABASE_TEST_URL=$(echo "$status" | jq -r .API_URL)
+          export SUPABASE_TEST_PUBLISHABLE_KEY=$(echo "$status" | jq -r .PUBLISHABLE_KEY)
+          export SUPABASE_TEST_SECRET_KEY=$(echo "$status" | jq -r .SECRET_KEY)
+          npx vitest run tests/db
+      - name: Generated types are up to date
+        run: |
+          npx supabase gen types typescript --local > generated.types.ts
+          npx prettier --write generated.types.ts > /dev/null
+          diff -q generated.types.ts src/lib/supabase/database.types.ts

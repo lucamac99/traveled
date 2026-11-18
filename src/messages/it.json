@@ -1,0 +1,82 @@
+{
+  "common": {
+    "appName": "Wayfare",
+    "loading": "Caricamento…",
+    "back": "Indietro",
+    "signOut": "Esci",
+    "save": "Salva",
+    "cancel": "Annulla"
+  },
+  "roles": {
+    "owner": "Proprietario",
+    "editor": "Editor",
+    "viewer": "Lettore"
+  },
+  "login": {
+    "title": "Pianificalo insieme. Ricordalo insieme.",
+    "subtitle": "Accedi per vedere i tuoi viaggi e unirti a quelli a cui sei invitato.",
+    "google": "Continua con Google",
+    "error": "Accesso non riuscito. Riprova."
+  },
+  "trips": {
+    "title": "I tuoi viaggi",
+    "new": "Nuovo viaggio",
+    "empty": "Ancora nessun viaggio. Creane uno, oppure apri un link di invito di un amico.",
+    "inviteInvalid": "Il link di invito non è valido, è scaduto o è stato revocato. Chiedine uno nuovo.",
+    "dates": "{start} – {end}",
+    "noDates": "Date non impostate"
+  },
+  "newTrip": {
+    "title": "Nuovo viaggio",
+    "fieldTitle": "Nome del viaggio",
+    "fieldDestination": "Destinazione",
+    "fieldStart": "Data di inizio",
+    "fieldEnd": "Data di fine",
+    "fieldTimezone": "Fuso orario",
+    "timezoneHint": "Usato per il programma dei giorni. Potrai cambiarlo per singolo giorno.",
+    "submit": "Crea viaggio",
+    "errors": {
+      "title_required": "Dai un nome al viaggio.",
+      "title_too_long": "Il nome deve avere meno di 120 caratteri.",
+      "destination_too_long": "La destinazione deve avere meno di 200 caratteri.",
+      "invalid_date": "Inserisci una data valida.",
+      "end_before_start": "La data di fine deve essere uguale o successiva a quella di inizio.",
+      "invalid_timezone": "Scegli un fuso orario valido.",
+      "save_failed": "Impossibile salvare il viaggio. Riprova."
+    }
+  },
+  "trip": {
+    "members": "Viaggiatori",
+    "settings": "Membri e inviti",
+    "notFound": "Questo viaggio non esiste oppure non ne fai parte.",
+    "comingNext": "Programma, mappa e checklist arriveranno nelle prossime milestone."
+  },
+  "settings": {
+    "title": "Membri e inviti",
+    "members": "Viaggiatori",
+    "you": "tu",
+    "invite": "Invita amici",
+    "inviteHint": "Chiunque abbia il link può unirsi finché non scade (14 giorni) o finché non lo revochi.",
+    "role": "Ruolo",
+    "createLink": "Crea link di invito",
+    "copy": "Copia link",
+    "copied": "Copiato",
+    "linkOnce": "Copialo adesso: per sicurezza il link completo viene mostrato una sola volta.",
+    "active": "Link attivi",
+    "none": "Nessun link attivo.",
+    "expires": "{role} · scade il {date}",
+    "revoke": "Revoca",
+    "ownerOnly": "Solo il proprietario del viaggio può invitare persone.",
+    "errors": {
+      "invalid_input": "Manca qualcosa. Riprova.",
+      "not_allowed": "Solo il proprietario del viaggio può creare link di invito.",
+      "save_failed": "Impossibile creare il link. Riprova."
+    }
+  },
+  "join": {
+    "title": "Sei stato invitato",
+    "as": "Partecipa come {role}",
+    "button": "Unisciti al viaggio",
+    "invalid": "Il link di invito non è valido, è scaduto o è stato revocato. Chiedine uno nuovo al proprietario del viaggio."
+  }
+}

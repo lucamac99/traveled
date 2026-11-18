@@ -1,0 +1,142 @@
+/*
+ * Wayfare design tokens — v0.1 (M0)
+ * Source of truth: the "Wayfare design" canvas (Design system artboard).
+ * Keep this file and the canvas in sync. Tailwind maps these in M1 (@theme).
+ */
+
+:root {
+  /* Colour · light */
+  --bg: #f7f5f1;
+  --surface: #ffffff;
+  --surface-2: #f0ece5;
+  --ink: #1b1a17;
+  --ink-muted: #5e5a53;
+  --line: #e4dfd6;
+  --accent: #c2532b;
+  --accent-strong: #9e3f1e;
+  --accent-soft: #f6e3da;
+  --on-accent: #ffffff;
+  --success: #2f7a4f;
+  --success-soft: #e3f0e8;
+  --danger: #b3261e;
+
+  /* Day palette — assigned in order, repeats after day 10. White numerals on all. */
+  --day-1: #c2532b; /* terracotta */
+  --day-2: #2f6f8f; /* ocean */
+  --day-3: #577a2c; /* olive */
+  --day-4: #9c6b1a; /* ochre */
+  --day-5: #7a4e8c; /* plum */
+  --day-6: #24796a; /* teal */
+  --day-7: #b23f62; /* rose */
+  --day-8: #4f5fa8; /* indigo */
+  --day-9: #8a5f43; /* walnut */
+  --day-10: #4e7091; /* slate */
+
+  /* Map style */
+  --map-land: #eeebe5;
+  --map-water: #cfdde3;
+  --map-park: #dfe5d2;
+  --map-road: #ffffff;
+  --map-road-minor: #f8f6f2;
+  --map-label: #8a857c;
+  --route-casing: #ffffff;
+
+  /* Type — families are Fraunces (display) and Inter (UI), loaded with next/font in the root layout */
+  --text-display-xl: 2.75rem; /* 44 / 48 */
+  --text-display-l: 2rem; /* 32 / 36 */
+  --text-display-m: 1.5rem; /* 24 / 30 */
+  --text-body: 1.0625rem; /* 17 / 26 */
+  --text-label: 0.9375rem; /* 15 / 20 */
+  --text-caption: 0.8125rem; /* 13 / 18 */
+  --text-overline: 0.6875rem; /* 11, 600, +0.12em, uppercase */
+
+  /* Spacing — 4 px base */
+  --space-1: 4px;
+  --space-2: 8px;
+  --space-3: 12px;
+  --space-4: 16px;
+  --space-5: 24px;
+  --space-6: 32px;
+  --space-7: 48px;
+  --space-8: 64px;
+
+  /* Radius */
+  --radius-xs: 6px; /* inputs */
+  --radius-sm: 10px; /* chips */
+  --radius-md: 16px; /* cards */
+  --radius-lg: 24px; /* sheets */
+  --radius-pill: 999px; /* buttons */
+
+  /* Depth */
+  --shadow-1: 0 1px 2px rgb(27 26 23 / 0.06), 0 1px 1px rgb(27 26 23 / 0.04);
+  --shadow-2: 0 8px 24px rgb(27 26 23 / 0.1);
+  --shadow-3: 0 -10px 36px rgb(27 26 23 / 0.14);
+  --blur-sheet: 16px;
+
+  /* Motion */
+  --dur-tap: 160ms;
+  --dur-sheet: 320ms;
+  --dur-route: 900ms;
+  --ease-out: cubic-bezier(0.2, 0.8, 0.2, 1);
+
+  /* Layout */
+  --tap-min: 44px;
+  --tabbar-h: 84px;
+}
+
+/* Colour · dark (system preference unless the user forced light) */
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #12110f;
+    --surface: #1c1a17;
+    --surface-2: #26231f;
+    --ink: #f3efe8;
+    --ink-muted: #a8a196;
+    --line: #34302a;
+    --accent: #e07a52;
+    --accent-strong: #f09a76;
+    --accent-soft: #3a2219;
+    --on-accent: #12110f; /* white on #e07a52 fails AA; use dark ink */
+    --success: #5fb383;
+    --success-soft: #1d2e24;
+    --danger: #f2786d;
+    --map-land: #1e1d1b;
+    --map-water: #22303a;
+    --map-park: #232a20;
+    --map-road: #2c2a27;
+    --map-road-minor: #242220;
+    --map-label: #8a857c;
+    --route-casing: #12110f;
+  }
+}
+
+:root[data-theme="dark"] {
+  --bg: #12110f;
+  --surface: #1c1a17;
+  --surface-2: #26231f;
+  --ink: #f3efe8;
+  --ink-muted: #a8a196;
+  --line: #34302a;
+  --accent: #e07a52;
+  --accent-strong: #f09a76;
+  --accent-soft: #3a2219;
+  --on-accent: #12110f;
+  --success: #5fb383;
+  --success-soft: #1d2e24;
+  --danger: #f2786d;
+  --map-land: #1e1d1b;
+  --map-water: #22303a;
+  --map-park: #232a20;
+  --map-road: #2c2a27;
+  --map-road-minor: #242220;
+  --map-label: #8a857c;
+  --route-casing: #12110f;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  :root {
+    --dur-tap: 0ms;
+    --dur-sheet: 0ms;
+    --dur-route: 0ms;
+  }
+}
